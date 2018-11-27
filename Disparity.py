@@ -24,7 +24,7 @@ disparity = (disparity - np.min(disparity)) / 32
 # Finding disparity using my own function
 print("Starting now")
 
-block_size = [5, 5]
+block_size = [7, 7]
 
 i_range = L_gray.shape[0] // block_size[0]
 j_range = L_gray.shape[1] // block_size[1]
@@ -39,8 +39,8 @@ for i in range(i_range):
 		L_sub = L_gray[block_size[0]*i : block_size[0]*(i+1), block_size[1]*j : block_size[1]*(j+1)]
 
 		#for k in range(k_range):
-		l = block_size[1]*j - 50
-		for k in range(100):
+		l = block_size[1]*j - 40
+		for k in range(80):
 			if (l >= 0 and l < L_gray.shape[1] - block_size[1]):
 				R_sub = R_gray[block_size[0]*i : block_size[0]*(i+1), l : l + block_size[1]]
 				# R_sub = R_gray[block_size[0]*i : block_size[0]*(i+1), k : k + block_size[1]]
@@ -57,6 +57,7 @@ for i in range(i_range):
 print("Done")
 print("minimum", np.min(D_map))
 print("maximum", np.max(D_map))
-D_map = np.uint8(((D_map - np.min(D_map))/np.max(D_map))*255)
+# D_map = np.uint8(((D_map - np.min(D_map))/np.max(D_map))*255)
+D_map = np.uint8(D_map * 8)
 cv.imshow('image', D_map)
 cv.waitKey(0)
