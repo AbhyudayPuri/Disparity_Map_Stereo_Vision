@@ -1,29 +1,7 @@
 import numpy as np 
 import cv2 as cv 
 import math
-
-def mutual_information(X, Y):
-	X = X.flatten()
-	Y = Y.flatten()
-
-	c_XY = np.histogram2d(X, Y)[0]
-	c_X = np.histogram(X)[0]
-	c_Y = np.histogram(Y)[0]
-
-	H_X = channon_entropy(c_X)
-	H_Y = channon_entropy(c_Y)
-	H_XY = channon_entropy(c_XY)
-
-	MI = H_X + H_Y - H_XY
-	return MI
-
-
-def channon_entropy(c):
-	c_normalized = c / float(np.sum(c))
-	c_normalized = c_normalized[np.nonzero(c_normalized)]
-	
-	H = -np.sum(c_normalized * np.log2(c_normalized))  
-	return H
+import Mutual_Information as mi 
 
 # Reading the images
 L = cv.imread('/Users/abhyudaypuri/Downloads/sawtooth/im0.ppm')
@@ -78,7 +56,7 @@ for i in range(i_range):
 			if (l >= 0 and l < L_gray.shape[1] - block_size[1]):
 				R_sub = R_gray[block_size[0]*i : block_size[0]*(i+1), l : l + block_size[1]]
 				# R_sub = R_gray[block_size[0]*i : block_size[0]*(i+1), k : k + block_size[1]]
-				curr_cost = -mutual_information(L_sub, R_sub)
+				curr_cost = -mi.mutual_information(L_sub, R_sub)
 				# curr_cost = np.sqrt(np.sum((L_sub - R_sub)**2))
 				# curr_cost = np.sum(np.abs(L_sub-R_sub))
 				if curr_cost < cost:
@@ -90,10 +68,10 @@ for i in range(i_range):
 
 					if (l-1 >= 0  and l+1 < L_gray.shape[1] - block_size[1]):
 						R_sub = R_gray[block_size[0]*i : block_size[0]*(i+1), l-1 : l + block_size[1]-1]
-						C1 = -mutual_information(L_sub, R_sub)
+						C1 = -mi.mutual_information(L_sub, R_sub)
 						# C1 = np.sqrt(np.sum((L_sub - R_sub)**2))
 						R_sub = R_gray[block_size[0]*i : block_size[0]*(i+1), l+1 : l + block_size[1]+1]
-						C3 = -mutual_information(L_sub, R_sub)
+						C3 = -mi.mutual_information(L_sub, R_sub)
 						# C3 = np.sqrt(np.sum((L_sub - R_sub)**2))
 
 					d = np.abs((j*block_size[1] - l))
@@ -110,9 +88,9 @@ print("maximum", np.max(D_map))
 D_map = np.uint8(D_map * 8)
 cv.imshow('image', D_map)
 cv.waitKey(0)
-cv.imwrite('Unfiltered_MI.png', D_map)
+# cv.imwrite('Unfiltered_MI.png', D_map)
 
 D_map_filtered = cv.medianBlur(D_map, 15)
 cv.imshow('filtered image', D_map_filtered)
 cv.waitKey(0)
-cv.imwrite('Filtered_MI.png', D_map_filtered)
+# cv.imwrite('Filtered_MI.png', D_map_filtered)
