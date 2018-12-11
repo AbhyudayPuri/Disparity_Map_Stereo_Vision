@@ -1,6 +1,6 @@
 import numpy as np 
 import cv2 as cv 
-import math
+# import math
 import Mutual_Information as mi 
 
 def compute_disparity_map(L, R, block_size = [7, 7]):
@@ -13,7 +13,7 @@ def compute_disparity_map(L, R, block_size = [7, 7]):
 	for i in range(i_range):
 		print("i = ", i)
 		for j in range(j_range):
-			cost = math.inf
+			cost = np.inf
 			L_sub = L[block_size[0]*i : block_size[0]*(i+1), block_size[1]*j : block_size[1]*(j+1)]
 
 			#for k in range(k_range):
