@@ -2,6 +2,7 @@ import numpy as np
 import cv2 as cv 
 import math
 import Disparity as dis
+import host_code
 
 # Reading the images
 # L = cv.imread('/Users/abhyudaypuri/Downloads/sawtooth/im0.ppm')
@@ -9,6 +10,9 @@ import Disparity as dis
 
 L = cv.imread('Data/sawtooth/im0.ppm')
 R = cv.imread('Data/sawtooth/im6.ppm')
+
+# L = cv.imread('Data/tsukuba/scene1.row3.col1.ppm')
+# R = cv.imread('Data/tsukuba/scene1.row3.col3.ppm')
 
 # L = cv.imread('/Users/abhyudaypuri/Downloads/tsukuba/scene1.row3.col1.ppm')
 # R = cv.imread('/Users/abhyudaypuri/Downloads/tsukuba/scene1.row3.col3.ppm')
@@ -47,9 +51,9 @@ block_size = [9, 9]
 # for i in range(2):
 # 	D_map = D_map + dis.compute_disparity_map(L_gray, R_gray, [5 + 5*i, 5 + 5*i])
 
-D_map = dis.compute_disparity_map(L_gray, R_gray, block_size)
+# D_map = dis.compute_disparity_map(L_gray, R_gray, block_size)
 # D_map_m = dis.compute_disparity_map(R_gray, L_gray, block_size)
-
+D_map = host_code.compute_disparity_gpu(L_gray, R_gray, block_size)
 # D_map_b[np.abs(D_map_b - D_map_m) > 1] = 0
 # D_map = np.uint8((D_map_b + D_map_m)/2)
 
@@ -59,7 +63,7 @@ print("Done")
 # cv.waitKey(0)
 cv.imwrite('Output/Unfiltered_MI.png', D_map)
 
-D_map_filtered = cv.medianBlur(D_map, 15)
+D_map_filtered = cv.medianBlur(D_map, 13)
 # cv.imshow('filtered image', D_map_filtered)
 # cv.waitKey(0)
 cv.imwrite('Output/Filtered_MI.png', D_map_filtered)

@@ -17,8 +17,8 @@ def compute_disparity_map(L, R, block_size = [7, 7]):
 			L_sub = L[block_size[0]*i : block_size[0]*(i+1), block_size[1]*j : block_size[1]*(j+1)]
 
 			#for k in range(k_range):
-			l = block_size[1]*j - 50
-			for k in range(100):
+			l = block_size[1]*j - 25
+			for k in range(50):
 				if (l >= 0 and l < L.shape[1] - block_size[1]):
 					R_sub = R[block_size[0]*i : block_size[0]*(i+1), l : l + block_size[1]]
 					# R_sub = R[block_size[0]*i : block_size[0]*(i+1), k : k + block_size[1]]
