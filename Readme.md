@@ -25,4 +25,4 @@ The output of our GPU code is:
 
 And it's filtered version is given by:
 <br>
-<img src = "GPU_filtered.png" alt="output_1">
+<img src = "GPU_Filtered.png" alt="output_1">
