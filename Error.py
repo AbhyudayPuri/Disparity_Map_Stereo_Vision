@@ -1,22 +1,26 @@
 import cv2 as cv
 import numpy as np 
 
-# Checking deviation from ground truth
+###############################################################################
+# This file can be used to compute the error between your generated disparity #
+# and the ground truth disparity                                              #
+###############################################################################
 
 def mse_err(gt, res):
 	err = np.mean((gt - res)**2)
 	return err
 
-img_gt = cv.imread('/Users/abhyudaypuri/Downloads/sawtooth/disp6.pgm')
-img_MI = cv.imread('/Users/abhyudaypuri/Downloads/Filtered_MI.png')
-img_SSE = cv.imread('/Users/abhyudaypuri/Downloads/Sub-Pixel/Filtered_MI.png')
+# Reading the ground truth image
+img_gt = cv.imread('./data/disp6.pgm')
+# Reading the generated disparity
+img_comp = cv.imread('./data/filtered_disparity.png')
 
-print(img_gt.shape)
+# Converting the read images into grayscale
 img_gt = cv.cvtColor(img_gt, cv.COLOR_BGR2GRAY)
-img_MI = cv.cvtColor(img_MI, cv.COLOR_BGR2GRAY)
-img_SSE = cv.cvtColor(img_SSE, cv.COLOR_BGR2GRAY)
+img_comp = cv.cvtColor(img_comp, cv.COLOR_BGR2GRAY)
 
-err_MI = mse_err(img_gt, img_MI)
-err_SSE = mse_err(img_gt, img_SSE)
+# Calculating the error between the 2 images
+err = mse_err(img_gt, img_comp)
 
-print("normal: ", err_MI, "subpixel: ", err_SSE)
+# Print the output on the STDOUT
+print("Error:", err_SSE)

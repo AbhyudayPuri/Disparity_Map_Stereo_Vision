@@ -85,4 +85,5 @@ def compute_disparity_gpu(L_cpu, R_cpu, block_size_cpu = [9, 9]):
 	D_map_cpu = D_map_gpu.get()
 	D_map_cpu = np.uint8(D_map_cpu)
 	D_map_cpu = np.uint8(D_map_cpu * 8)	
+	
 	return D_map_cpu
