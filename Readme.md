@@ -21,4 +21,4 @@ the actual ground truth file.
 The output of our GPU code is:
 <br>
 
-<img src = 'GPU_raw.png alt="output">
+<img src = "GPU_raw.png" alt="output">
