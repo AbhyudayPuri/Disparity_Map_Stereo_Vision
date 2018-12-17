@@ -17,3 +17,8 @@ The Disparity.py file contains the serial code function for computing the dispar
 between a stereo pair. 
 The Error.py file can be used to find the error between the computed disparity and
 the actual ground truth file. 
+
+The output of our GPU code is:
+<br>
+
+<img src = 'GPU_raw.png alt="output">
