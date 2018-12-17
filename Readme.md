@@ -9,3 +9,11 @@ can add your custom path over there. The output files are written in the data fo
 
 The GPU code runs 4500 times faster than the CPU code, and achieves a frame rate of 
 35 fps. 
+
+Organization:
+The host_code.py file contains the GPU kernel code, as well as the host code to
+for interfacing with the device. 
+The Disparity.py file contains the serial code function for computing the disparity 
+between a stereo pair. 
+The Error.py file can be used to find the error between the computed disparity and
+the actual ground truth file. 
