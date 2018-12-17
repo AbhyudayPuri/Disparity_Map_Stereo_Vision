@@ -1,3 +1,5 @@
+<H1> Disparity Map Creation Using the GPU </H1>
+
 This project aims at parallelizing the disparity map creation for stereo images. 
 We implement the block matching algorithm on the CPU and GPU. The CPU implementation
 is in Python. The GPU implementation is in PyCUDA. 
